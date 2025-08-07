@@ -1,0 +1,34 @@
+name: Simple Echo Test
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  echo-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Echo basic info
+      run: |
+        echo "Hello from GitHub Actions!"
+        echo "Repository: ${{ github.repository }}"
+        echo "Branch: ${{ github.ref_name }}"
+        echo "Commit: ${{ github.sha }}"
+        echo "Actor: ${{ github.actor }}"
+    
+    - name: Echo environment variables
+      run: |
+        echo "Node version: $(node --version)"
+        echo "NPM version: $(npm --version)"
+        echo "Current directory: $(pwd)"
+        echo "Files in directory:"
+        ls -la
+    
+    - name: Echo custom variables
+      run: |
+        echo "Custom variable test: ${{ vars.TEST_VARIABLE || 'Not set' }}"
+        echo "Secret test: ${{ secrets.TEST_SECRET || 'Not set' }}" 

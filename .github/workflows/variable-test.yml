@@ -1,0 +1,68 @@
+name: Variable Test
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      custom_input:
+        description: 'Custom input variable'
+        required: false
+        default: 'Default value'
+
+env:
+  GLOBAL_VAR: "This is a global variable"
+
+jobs:
+  variable-test:
+    runs-on: ubuntu-latest
+    
+    env:
+      JOB_VAR: "This is a job-level variable"
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Test global variables
+      run: |
+        echo "=== Global Variables ==="
+        echo "GLOBAL_VAR: $GLOBAL_VAR"
+        echo "GITHUB_REPOSITORY: $GITHUB_REPOSITORY"
+        echo "GITHUB_SHA: $GITHUB_SHA"
+        echo "GITHUB_REF: $GITHUB_REF"
+    
+    - name: Test job variables
+      run: |
+        echo "=== Job Variables ==="
+        echo "JOB_VAR: $JOB_VAR"
+        echo "RUNNER_OS: $RUNNER_OS"
+        echo "RUNNER_ARCH: $RUNNER_ARCH"
+    
+    - name: Test step variables
+      env:
+        STEP_VAR: "This is a step-level variable"
+      run: |
+        echo "=== Step Variables ==="
+        echo "STEP_VAR: $STEP_VAR"
+        echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
+        echo "GITHUB_ACTOR: $GITHUB_ACTOR"
+    
+    - name: Test workflow inputs
+      run: |
+        echo "=== Workflow Inputs ==="
+        echo "Custom input: ${{ github.event.inputs.custom_input }}"
+        echo "Event type: ${{ github.event_name }}"
+    
+    - name: Test conditional variables
+      run: |
+        echo "=== Conditional Variables ==="
+        echo "Is main branch: ${{ github.ref == 'refs/heads/main' }}"
+        echo "Is PR: ${{ github.event_name == 'pull_request' }}"
+        echo "Event action: ${{ github.event.action }}"
+    
+    - name: Test secrets and variables
+      run: |
+        echo "=== Secrets and Variables ==="
+        echo "Custom variable: ${{ vars.CUSTOM_VAR || 'Not set' }}"
+        echo "Custom secret: ${{ secrets.CUSTOM_SECRET || 'Not set' }}"
+        echo "GitHub token exists: ${{ secrets.GITHUB_TOKEN != '' }}" 
