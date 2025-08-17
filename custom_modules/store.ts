@@ -30,6 +30,8 @@ export const createStore = <T>(initialState: T): Store<T> => {
   const subscribe = (listener: Listener<T>) => {
     listeners.add(listener);
     // 구독 해제 함수 반환
+    console.log("subscribed! : ", listeners.size);
+
     return () => {
       listeners.delete(listener);
     };
