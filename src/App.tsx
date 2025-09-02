@@ -1,17 +1,14 @@
-import React, { useEffect, useState } from "react";
-import useCounterStore from "./store.js";
-import CounterView from "./counterView.js";
+import React from "react";
 import { useCounter } from "./customStore.js";
+import CounterView from "./CounterView.js";
 
 const App: React.FC = () => {
-  console.log("App component rendered");
-
-  // const { count } = useCounter();
-  const store = useCounterStore();
+  const { count } = useCounter();
+  // const store = useCounterStore();
 
   return (
     <h1>
-      무한 렌더링 테스트용 프로젝트 {store.count}
+      무한 렌더링 테스트용 프로젝트 {count}
       <CounterView />
     </h1>
   );

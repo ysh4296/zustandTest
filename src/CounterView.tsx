@@ -3,22 +3,18 @@ import { counterStore, useCounter } from "./customStore.js";
 const CounterView: React.FC = () => {
   console.log("CounterView component rendered");
 
-  const { count } = useCounter();
+  const { count,increment,decrement } = useCounter();
 
   return (
     <div>
       <h1>Counter: {count}</h1>
       <button
-        onClick={() =>
-          counterStore.setState((prev) => ({ count: prev.count - 1 }))
-        }
+        onClick={decrement}
       >
         Decrement
       </button>
       <button
-        onClick={() =>
-          counterStore.setState((prev) => ({ count: prev.count + 1 }))
-        }
+        onClick={increment}
       >
         Increment
       </button>

@@ -12,6 +12,7 @@ export const createStore = <T>(initialState: T): Store<T> => {
   // 상태가 변했을 때 알림을 받는 컴포넌트 정보를 저장하는 집합
   const listeners = new Set<Listener<T>>();
 
+  // 클로저를 사용해 state 접근
   const getState = () => state;
 
   // state가 바뀌면 리스너를 호출
@@ -30,8 +31,6 @@ export const createStore = <T>(initialState: T): Store<T> => {
   const subscribe = (listener: Listener<T>) => {
     listeners.add(listener);
     // 구독 해제 함수 반환
-    console.log("subscribed! : ", listeners.size);
-
     return () => {
       listeners.delete(listener);
     };
