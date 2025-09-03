@@ -1,25 +1,21 @@
-import { counterStore, useCounter } from "./customStore.js";
+import { useCounter } from "./customStore.js";
 
 const CounterView: React.FC = () => {
-  console.log("CounterView component rendered");
+	console.log("CounterView component rendered");
 
-  const { count,increment,decrement } = useCounter();
+	const { count, increment, decrement } = useCounter();
 
-  return (
-    <div>
-      <h1>Counter: {count}</h1>
-      <button
-        onClick={decrement}
-      >
-        Decrement
-      </button>
-      <button
-        onClick={increment}
-      >
-        Increment
-      </button>
-    </div>
-  );
+	return (
+		<div>
+			<h1>Counter: {count}</h1>
+			<button type="button" onClick={decrement}>
+				Decrement
+			</button>
+			<button type="button" onClick={increment}>
+				Increment
+			</button>
+		</div>
+	);
 };
 
 export default CounterView;
