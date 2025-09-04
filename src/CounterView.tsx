@@ -1,8 +1,6 @@
 import { useCounter } from "./customStore.js";
 
 const CounterView: React.FC = () => {
-	console.log("CounterView component rendered");
-
 	const { count, increment, decrement } = useCounter();
 
 	return (

@@ -12,11 +12,10 @@ export function useExternalStore<T>(
 	useEffect(() => {
 		callbackRef.current = () => {
 			const nextState = getSnapshot();
-			setState(nextState);
+			setState({ ...nextState });
 		};
 
 		const unsubscribe = subscribe(callbackRef.current);
-		console.log("subscribe or getSnapshot changed!");
 
 		return () => {
 			unsubscribe?.();
