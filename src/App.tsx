@@ -1,14 +1,10 @@
-import React from "react";
-import { useCounter } from "./customStore.js";
 import CounterView from "./CounterView.js";
+import NumberView from "./NumberView.js";
 
 const App: React.FC = () => {
-	const { count } = useCounter();
-	// const store = useCounterStore();
-
 	return (
 		<h1>
-			무한 렌더링 테스트용 프로젝트 {count}
+			<NumberView />
 			<CounterView />
 		</h1>
 	);

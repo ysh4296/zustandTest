@@ -12,7 +12,7 @@ export function useExternalStore<T>(
 	useEffect(() => {
 		callbackRef.current = () => {
 			const nextState = getSnapshot();
-			setState({ ...nextState });
+			if (state !== nextState) setState(nextState);
 		};
 
 		const unsubscribe = subscribe(callbackRef.current);
@@ -20,7 +20,7 @@ export function useExternalStore<T>(
 		return () => {
 			unsubscribe?.();
 		};
-	}, [subscribe, getSnapshot]);
+	}, [subscribe, getSnapshot, state]);
 
 	return state;
 }
